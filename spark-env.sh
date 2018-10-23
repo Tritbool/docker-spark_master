@@ -56,7 +56,7 @@
 # - SPARK_DAEMON_CLASSPATH, to set the classpath for all daemons
 # - SPARK_PUBLIC_DNS, to set the public dns name of the master or workers
 
-SPARK_MASTER_HOST=spark://spark-master:7077
+SPARK_MASTER_HOST=`hostname`
 
 SPARK_WORKER_CORES=12
 SPARK_WORKER_MEMORY=8G
