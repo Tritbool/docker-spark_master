@@ -1,0 +1,46 @@
+version: '3' 
+services:
+  namenode:
+    image: bde2020/hadoop-namenode:1.1.0-hadoop2.8-java8
+    container_name: namenode
+    volumes:
+      - ./data/namenode:/hadoop/dfs/name
+    environment:
+      - CLUSTER_NAME=test
+    env_file:
+      - ./hadoop.env
+    ports:
+      - 50070:50070
+  datanode:
+    image: bde2020/hadoop-datanode:1.1.0-hadoop2.8-java8
+    depends_on: 
+      - namenode
+    volumes:
+      - ./data/datanode:/hadoop/dfs/data
+    env_file:
+      - ./hadoop.env
+    ports:
+      - 50075:50075
+  spark-worker-1:
+    image: spark-worker
+    ports:
+      - 8081:8081
+  spark-worker-2:
+    image: spark-worker
+    ports:
+      - 8082:8082
+  spark-worker-3:
+    image: spark-worker
+    ports:
+      - 8083:8083
+  spark-master:
+    image: spark-master
+    depends_on:
+      - spark-worker-1
+      - spark-worker-2
+      - spark-worker-3
+    container_name: spark-master
+    ports:
+      - 8080:8080
+      - 7077:7077
+      - 8091:8091
