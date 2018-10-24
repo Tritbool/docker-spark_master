@@ -44,3 +44,11 @@
     ports:
       - 8083:8083
     tty: true      
+  zeppelin:
+    image: tritbool/zeppelin:latest
+    container_name: zeppelin
+    depends_on:
+      - spark-master
+    ports:
+      - 8091:8091
+    tty: true    

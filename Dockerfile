@@ -1,7 +1,5 @@
 FROM java:8
 
-
-
 WORKDIR /opt
 
 RUN apt-get update \ 
